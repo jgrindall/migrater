@@ -60,8 +60,8 @@ MCQParser.prototype.addSettings = function(){
 	var NUM_SECS_PER_QUESTION = 45;
 	var numQuestions = this.json.questions.questionqroup.length;
 	this.skeleton.settings.introScreen.imageCache.main = this.skeleton.questions[0].config.data.thumbnail || "/images/2quiz/introscreen/ques.jpg";
-	this.skeleton.settings.introScreen.text.contents = "Title";
-	this.skeleton.settings.introScreen.title.contents = "Title";
+	this.skeleton.settings.introScreen.title.contents = "TITLE GOES HERE";
+	this.skeleton.settings.introScreen.text.contents = "TEXT GOES HERE";
 	this.skeleton.settings.introScreen.timer.data.startTimeInSeconds = 60 * Math.ceil((numQuestions * NUM_SECS_PER_QUESTION) / 60);
 };
 
