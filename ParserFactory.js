@@ -1,6 +1,6 @@
 "use strict";
 
-var MCQParser =     require("./MCQParser");
+var MCQParser =     require("./types/mcq/MCQParser");
 var _ =             require("underscore");
 
 var ParserFactory = function(){
