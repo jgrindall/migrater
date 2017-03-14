@@ -7,7 +7,7 @@ var port = 				Number(process.env.PORT || 5000);
 
 var output = function(res, newName, json){
 	res.writeHead(200, {'content-type': 'application/force-download','Content-disposition':'attachment; filename=' + newName});
-	res.write(JSON.stringify(json));
+	res.write(JSON.stringify(json, null, 2));
 	res.end();
 };
 
