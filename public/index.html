@@ -1,0 +1,44 @@
+<!doctype html>
+<html lang="en">
+	<head>
+
+		<meta charset="utf-8">
+		<meta name="apple-mobile-web-app-capable" content="yes" />
+		<meta name="apple-mobile-web-app-status-bar-style" content="black" />
+		<meta name="viewport" content = "width = device-width, initial-scale = 1.0, user-scalable = no, minimum-scale = 1, maximum-scale = 1" />
+		<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.1.1/jquery.min.js"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+		<style>
+			*{
+				font-family:Helvetica, Verdana,Arial,sans-serif;
+				font-size:18px;
+				color:#222;
+				margin:6px;
+				padding:6px;
+			}
+		</style>
+	</head>
+	<body>
+		<form action="/upload" method="post" enctype="multipart/form-data">
+			<input id="upload-input" type="file" name="upload" multiple="multiple"></input>
+			<input type="submit" value="submit">
+		</form>
+		<script>
+		
+			var formData;
+			
+			$(document).ready(function(){
+				$('#upload-input').on('change', function(){
+					var files = $(this).get(0).files;
+					formData = new FormData();
+					if (files.length > 0){
+						for (var i = 0; i < files.length; i++) {
+							formData.append('upload', files[i], files[i].name);
+						}
+					}
+				});
+			});
+		</script>
+	</body>
+</html>
+

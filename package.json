@@ -11,9 +11,14 @@
   	"author": "jgrindall",
   	"license": "BSD",
   	"dependencies": {
-		   "mkdirp":"latest",
-		   "simple-xml":"latest",
-		   "bluebird":"latest",
-		   "underscore":"latest"
+			"mkdirp":"latest",
+			"express": "~3.5.1",
+			"formidable":"latest",
+			"simple-xml":"latest",
+			"bluebird":"latest",
+			"underscore":"latest",
+			"multer":"latest"
   	}
 }
+
+

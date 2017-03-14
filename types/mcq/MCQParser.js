@@ -66,10 +66,15 @@ MCQParser.prototype.addSettings = function(){
 };
 
 MCQParser.prototype.parse = function(){
-	this.addQuestions();
-	this.addOrder();
-	this.addSettings();
-	this.skeleton.creatorUserId = "1";
+	try{
+		this.addQuestions();
+		this.addOrder();
+		this.addSettings();
+		this.skeleton.creatorUserId = "1";
+	}
+	catch(e){
+		console.log("error", e);
+	}
     return Promise.resolve(this.skeleton);
 };
 
