@@ -16,7 +16,7 @@ var _output = function(res, newNames, jsonArray){
 	else{
 		var zip = new AdmZip();
 		_.each(jsonArray, function(json, i){
-			zip.addFile(newNames[i], new Buffer(JSON.stringify(jsonArray[0], null, 2)), "file " + i, 0400);
+			zip.addFile(newNames[i], new Buffer(JSON.stringify(jsonArray[i], null, 2)), "file " + i, 0400);
 		});
 		var willSendthis = zip.toBuffer();
 		res.setHeader('Content-disposition', 'attachment; filename=quiz.zip');
