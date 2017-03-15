@@ -25,3 +25,9 @@ github: migrater  (using john.grindall@gmail's account)
 
 Any time code is pushed to the 'migrater' remote it deploys the web app to heroku.
 
+
+
+options
+=======
+
+Currently the only option is "timePerQuestion" which can be 1-5 minutes
