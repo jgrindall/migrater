@@ -27,11 +27,11 @@ DIYMigrator.prototype.writeFile = function(url, json){
 	console.log("written", newPath);
 };
 
-DIYMigrator.prototype.parseFile = function(url){
+DIYMigrator.prototype.parseFile = function(url, options){
 	var str, json;
 	str = fs.readFileSync(url, 'utf8');
 	json = XML.parse(str);
-	return ParserFactory.parse(json);
+	return ParserFactory.parse(json, options);
 };
 
 // static

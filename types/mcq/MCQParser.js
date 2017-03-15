@@ -5,11 +5,15 @@ var Promise =           require("bluebird");
 var MCQ_SKELETON =      require("./MCQSkeleton");
 var Utils =      		require("../../utils/Utils");
 
-var getBase64
+var _getTimeForQuiz = function(timePerQuestion, numQuestions){
+	var minutes = Math.max(5, numQuestions * parseInt(timePerQuestion));
+	return 60 * minutes; // seconds
+};
 
-var MCQParser = function(json){
+var MCQParser = function(json, options){
 	this.skeleton = JSON.parse(JSON.stringify(MCQ_SKELETON));
     this.json = json;
+	this.options = _.defaults(options || {}, {"timePerQuestion":"3"});
 	this.clean();
 };
 
@@ -57,12 +61,12 @@ MCQParser.prototype.addOrder = function(){
 };
 
 MCQParser.prototype.addSettings = function(){
-	var NUM_SECS_PER_QUESTION = 45;
+	var timePerQuestion = this.options.timePerQuestion;
 	var numQuestions = this.json.questions.questionqroup.length;
 	this.skeleton.settings.introScreen.imageCache.main = this.skeleton.questions[0].config.data.thumbnail || "/images/2quiz/introscreen/ques.jpg";
 	this.skeleton.settings.introScreen.title.contents = "TITLE GOES HERE";
 	this.skeleton.settings.introScreen.text.contents = "TEXT GOES HERE";
-	this.skeleton.settings.introScreen.timer.data.startTimeInSeconds = 60 * Math.ceil((numQuestions * NUM_SECS_PER_QUESTION) / 60);
+	this.skeleton.settings.introScreen.timer.data.startTimeInSeconds = _getTimeForQuiz(timePerQuestion, numQuestions);
 };
 
 MCQParser.prototype.parse = function(){

@@ -20,12 +20,11 @@ app.get('/download', function(req, res) {
 });
 
 app.post('/upload', function(req, res) {
-	var file;
 	new formidable.IncomingForm()
 	.parse(req, function(err, fields, files) {
 		var newName = DIYMigrator.getNewPath(files.upload.name);
         new DIYMigrator()
-		.parseFile(files.upload.path)
+		.parseFile(files.upload.path, fields)
 		.then(_.partial(output, res, newName));
     });
 });

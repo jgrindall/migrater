@@ -7,10 +7,10 @@ var ParserFactory = function(){
     //
 };
 
-ParserFactory.parse = function(json){
+ParserFactory.parse = function(json, options){
     var type = _.keys(json)[0];
     if(type === "MultiChoice"){
-        return new MCQParser(json[type]).parse();
+        return new MCQParser(json[type], options).parse();
     }
 }
 

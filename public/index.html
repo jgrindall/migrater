@@ -40,23 +40,23 @@
 		<form action="/upload" method="post" enctype="multipart/form-data">
 			<p>2Diy -> 2Quiz migrator</p>
 			<input id="upload-input" type="file" name="upload" multiple="multiple"></input>
+			<br/>
+			<input type="radio" name="timePerQuestion" value="1"> 1 min
+			<br/>
+			<input type="radio" name="timePerQuestion" value="2"> 2 min
+			<br/>
+			<input type="radio" name="timePerQuestion" value="3"> 3 min
+			<br/>
+			<input type="radio" name="timePerQuestion" value="4"> 4 min
+			<br/>
+			<input type="radio" name="timePerQuestion" value="5"> 5 min
+			<br/>
+			<br/>
 			<input type="submit" value="submit">
 		</form>
 		<script>
 		
-			var formData;
 			
-			$(document).ready(function(){
-				$('#upload-input').on('change', function(){
-					var files = $(this).get(0).files;
-					formData = new FormData();
-					if (files.length > 0){
-						for (var i = 0; i < files.length; i++) {
-							formData.append('upload', files[i], files[i].name);
-						}
-					}
-				});
-			});
 		</script>
 	</body>
 </html>
