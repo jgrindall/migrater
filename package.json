@@ -17,7 +17,8 @@
 		"simple-xml":"latest",
 		"bluebird":"latest",
 		"underscore":"latest",
-		"adm-zip":"latest"
+		"adm-zip":"latest",
+		"atob":"latest"
   	}
 }
 
