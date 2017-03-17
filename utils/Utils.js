@@ -1,9 +1,14 @@
 "use strict";
-var atob = require("atob");
+var atob = 				require("atob");
+var path = 				require('path');
+var fs = 				require("fs");
+var _ = 				require("underscore");
 
-var BASE_64_PNG = "data:image/png;base64,";
-var BASE_64_GIF = "data:image/gif;base64,";
-var BASE_64_JPG = "data:image/jpeg;base64,";
+var BASE_64_PNG = 		"data:image/png;base64,";
+var BASE_64_GIF =	 	"data:image/gif;base64,";
+var BASE_64_JPG = 		"data:image/jpeg;base64,";
+var EXTENSION = 		".2diy";
+var NEW_EXTENSION = 	".2quiz";
 
 var Utils = {
 	getBase64:function(s){
@@ -33,8 +38,24 @@ var Utils = {
 		}
 		// I think almost all of them are png, default to that if all else fails
 		return BASE_64_PNG + s;
+	},
+	arrayify:function(a){
+		return _.isArray(a) ? a : [a];
+	},
+	isCorrectExtension:function(file){
+		return path.extname(file.name) === EXTENSION;
+	},
+	getNewPath: function(file){
+		var url = file.name;
+		if(path.extname(url) === EXTENSION){
+			return url.substring(0, url.length - EXTENSION.length) + NEW_EXTENSION;
+		}
+		return url;
 	}
 };
+
+Utils.getNewPaths = _.partial(_.map, _, Utils.getNewPath);
+
 module.exports = Utils;
 
 

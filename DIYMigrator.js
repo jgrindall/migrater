@@ -4,11 +4,10 @@
 var path = 				require('path');
 var fs = 				require("fs");
 var XML = 				require('simple-xml');
+var Utils = 			require('./utils/Utils');
 var _ = 				require("underscore");
 var ParserFactory = 	require("./ParserFactory");
-
-var EXTENSION = 		".2diy";
-var NEW_EXTENSION = 	".2quiz";
+var DIYOutput = 		require("./DIYOutput");
 
 var DIYMigrator = function(configUrl){
 	if(configUrl){
@@ -17,34 +16,25 @@ var DIYMigrator = function(configUrl){
 };
 
 DIYMigrator.prototype.parseAndWriteFile = function(url){
-	this.parseFile(url)
+	console.log("parseAndWriteFile", url);
+	this.parseFile({"path":url})
 	.then(_.partial(this.writeFile, url));
 };
 
 DIYMigrator.prototype.writeFile = function(url, json){
-	var newPath = DIYMigrator.getNewPath(url);
-	fs.writeFileSync(newPath, JSON.stringify(json, null, 2), 'utf8');
-	console.log("written", newPath);
+	DIYOutput.write(Utils.getNewPath({"name":url}), json);
 };
 
-DIYMigrator.prototype.parseFile = function(url, options, name){
+DIYMigrator.prototype.parseFile = function(file, options){
 	var str, json;
-	str = fs.readFileSync(url, 'utf8');
+	str = fs.readFileSync(file.path, 'utf8');
 	try{
-		json = XML.parse(str);
+		return ParserFactory.parse(XML.parse(str), options);
 	}
 	catch(e){
-		console.log("failed to parse", url, options, name);
+		console.log("failed to parse", file, options);
 	}
-	return ParserFactory.parse(json, options);
-};
-
-// static
-DIYMigrator.getNewPath = function(url){
-	if(path.extname(url) === EXTENSION){
-		return url.substring(0, url.length - EXTENSION.length) + NEW_EXTENSION;
-	}
-	// else fail
+	return Promise.resolve("unable to parse xml??");
 };
 
 module.exports = DIYMigrator;
