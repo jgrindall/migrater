@@ -27,10 +27,15 @@ DIYMigrator.prototype.writeFile = function(url, json){
 	console.log("written", newPath);
 };
 
-DIYMigrator.prototype.parseFile = function(url, options){
+DIYMigrator.prototype.parseFile = function(url, options, name){
 	var str, json;
 	str = fs.readFileSync(url, 'utf8');
-	json = XML.parse(str);
+	try{
+		json = XML.parse(str);
+	}
+	catch(e){
+		console.log("failed to parse", url, options, name);
+	}
 	return ParserFactory.parse(json, options);
 };
 

@@ -43,7 +43,7 @@ app.post('/upload', function(req, res) {
 		});
 		Promise.all(_.map(filesArray, function(file){
 			return new DIYMigrator()
-			.parseFile(file.path, fields);
+			.parseFile(file.path, fields, file.name);
 		}))
 		.then(_.partial(_output, res, newNames))
 		.catch(function(e){
